@@ -593,62 +593,61 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 function timer(id, deadline) {
-    
-    // Timer
+	// Timer
 
-    function getTimeRemaining(endtime) {
-        const t = Date.parse(endtime) - Date.parse(new Date()),
-            days = Math.floor( (t/(1000*60*60*24)) ),
-            seconds = Math.floor( (t/1000) % 60 ),
-            minutes = Math.floor( (t/1000/60) % 60 ),
-            hours = Math.floor( (t/(1000*60*60) % 24) );
+	function getTimeRemaining(endtime) {
+		const t = Date.parse(endtime) - Date.parse(new Date()),
+			days = Math.floor(t / (1000 * 60 * 60 * 24)),
+			seconds = Math.floor((t / 1000) % 60),
+			minutes = Math.floor((t / 1000 / 60) % 60),
+			hours = Math.floor((t / (1000 * 60 * 60)) % 24);
 
-        return {
-            'total': t,
-            'days': days,
-            'hours': hours,
-            'minutes': minutes,
-            'seconds': seconds
-        };
-    }
+		return {
+			total: t,
+			days: days,
+			hours: hours,
+			minutes: minutes,
+			seconds: seconds,
+		};
+	}
 
-    function getZero(num){
-        if (num >= 0 && num < 10) { 
-            return '0' + num;
-        } else {
-            return num;
-        }
-    }
+	function getZero(num) {
+		if (num >= 0 && num < 10) {
+			return '0' + num;
+		} else {
+			return num;
+		}
+	}
 
-    function setClock(selector, endtime) {
+	function setClock(selector, endtime) {
+		const timer = document.querySelector(selector),
+			days = timer.querySelector('#days'),
+			hours = timer.querySelector('#hours'),
+			minutes = timer.querySelector('#minutes'),
+			seconds = timer.querySelector('#seconds'),
+			timeInterval = setInterval(updateClock, 1000);
 
-        const timer = document.querySelector(selector),
-            days = timer.querySelector("#days"),
-            hours = timer.querySelector('#hours'),
-            minutes = timer.querySelector('#minutes'),
-            seconds = timer.querySelector('#seconds'),
-            timeInterval = setInterval(updateClock, 1000);
+		updateClock();
 
-        updateClock();
+		function updateClock() {
+			const t = getTimeRemaining(endtime);
 
-        function updateClock() {
-            const t = getTimeRemaining(endtime);
+			days.innerHTML = getZero(t.days);
+			hours.innerHTML = getZero(t.hours);
+			minutes.innerHTML = getZero(t.minutes);
+			seconds.innerHTML = getZero(t.seconds);
 
-            days.innerHTML = getZero(t.days);
-            hours.innerHTML = getZero(t.hours);
-            minutes.innerHTML = getZero(t.minutes);
-            seconds.innerHTML = getZero(t.seconds);
+			if (t.total <= 0) {
+				clearInterval(timeInterval);
+			}
+		}
+	}
 
-            if (t.total <= 0) {
-                clearInterval(timeInterval);
-            }
-        }
-    }
-
-    setClock(id, deadline);
+	setClock(id, deadline);
 }
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (timer);
+
 
 /***/ }),
 
@@ -771,25 +770,26 @@ __webpack_require__.r(__webpack_exports__);
 
 
 window.addEventListener('DOMContentLoaded', () => {
-    const modalTimerId = setTimeout(() => (0,_modules_modal__WEBPACK_IMPORTED_MODULE_1__.default)('.modal', modalTimerId), 300000);
+	const modalTimerId = setTimeout(() => (0,_modules_modal__WEBPACK_IMPORTED_MODULE_1__.default)('.modal', modalTimerId), 300000);
 
-    (0,_modules_tabs__WEBPACK_IMPORTED_MODULE_0__.default)('.tabheader__item', '.tabcontent', '.tabheader__items', 'tabheader__item_active');
-    (0,_modules_modal__WEBPACK_IMPORTED_MODULE_1__.default)('[data-modal]', '.modal', modalTimerId);
-    (0,_modules_timer__WEBPACK_IMPORTED_MODULE_2__.default)('.timer', '2021-05-11');
-    (0,_modules_cards__WEBPACK_IMPORTED_MODULE_3__.default)();
-    (0,_modules_calculator__WEBPACK_IMPORTED_MODULE_4__.default)();
-    (0,_modules_forms__WEBPACK_IMPORTED_MODULE_5__.default)('form', modalTimerId);
-    (0,_modules_slider__WEBPACK_IMPORTED_MODULE_6__.default)({
-        container: '.offer__slider',
-        nextArrow: '.offer__slider-next',
-        prevArrow: '.offer__slider-prev',
-        slide: '.offer__slide',
-        totalCounter: '#total',
-        currentCounter: '#current',
-        wrapper: '.offer__slider-wrapper',
-        field: '.offer__slider-inner'
-    });
+	(0,_modules_tabs__WEBPACK_IMPORTED_MODULE_0__.default)('.tabheader__item', '.tabcontent', '.tabheader__items', 'tabheader__item_active');
+	(0,_modules_modal__WEBPACK_IMPORTED_MODULE_1__.default)('[data-modal]', '.modal', modalTimerId);
+	(0,_modules_timer__WEBPACK_IMPORTED_MODULE_2__.default)('.timer', '2022-05-11');
+	(0,_modules_cards__WEBPACK_IMPORTED_MODULE_3__.default)();
+	(0,_modules_calculator__WEBPACK_IMPORTED_MODULE_4__.default)();
+	(0,_modules_forms__WEBPACK_IMPORTED_MODULE_5__.default)('form', modalTimerId);
+	(0,_modules_slider__WEBPACK_IMPORTED_MODULE_6__.default)({
+		container: '.offer__slider',
+		nextArrow: '.offer__slider-next',
+		prevArrow: '.offer__slider-prev',
+		slide: '.offer__slide',
+		totalCounter: '#total',
+		currentCounter: '#current',
+		wrapper: '.offer__slider-wrapper',
+		field: '.offer__slider-inner',
+	});
 });
+
 })();
 
 /******/ })()
